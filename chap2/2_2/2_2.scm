@@ -17,6 +17,13 @@
       (car items)
       (last-pair (cdr items))))
 
+(define (filter condition items)
+  (display items) (newline)
+  (if (null? items)
+        '()
+        (if (condition (car items))
+            (cons (car items) (filter condition (cdr items)))
+            (filter condition (cdr items)))))
 
 (define (iter-r remained-items result)
   (if (null? remained-items)
@@ -31,3 +38,22 @@
 
 (last-pair l)
 (reverse l)
+
+
+
+
+
+(define (bigger-than-3 number) (> number 3))
+
+(filter bigger-than-3 l)
+
+
+(define (same-parity . z)
+  (define (equals-first number )
+
+    (= ((remainder (car z) 2))  (remainder  number 2) ))
+  (if (null? z)
+      '()
+      (filter  equals-first   z)))
+
+(same-parity 1 2 3 4 5 6 7)
